@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   check_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/05 18:20:12 by van               #+#    #+#             */
-/*   Updated: 2025/04/06 17:30:15 by van-nguy         ###   ########.fr       */
+/*   Created: 2025/04/06 15:43:02 by van-nguy          #+#    #+#             */
+/*   Updated: 2025/04/06 16:03:35 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+int	check_argv(int argc, char **argv)
 {
-	t_entries entries;
+	int	i;
+	int	value;
 
-	if (argc != 5 && argc != 6)
-		return (err_argc(argc));
-
-	if (entries_init(&entries, argc, argv))
-		return (1);
-
-	init_threads(&entries);
-
+	i = 0;
+	while (++i < argc)
+	{
+		value = ft_atoi(argv[i]);
+		if (!isnum(argv[i]))
+			return (err_invalid_argv(i));
+		if (value < 0 || value > 1000)
+			return (err_argc_value(i, value));
+		if (i == 1 && value > 100)
+			return (err_argc_value(i, value));
+	}
 	return (0);
-	if (argc || argv)
-		;
 }
-

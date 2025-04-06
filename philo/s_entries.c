@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   s_entries.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/05 18:20:12 by van               #+#    #+#             */
-/*   Updated: 2025/04/06 17:30:15 by van-nguy         ###   ########.fr       */
+/*   Created: 2025/04/06 12:53:50 by van-nguy          #+#    #+#             */
+/*   Updated: 2025/04/06 16:17:08 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+int	entries_init(t_entries *entries, int argc, char **argv)
 {
-	t_entries entries;
-
-	if (argc != 5 && argc != 6)
-		return (err_argc(argc));
-
-	if (entries_init(&entries, argc, argv))
+	if (check_argv(argc, argv))
 		return (1);
-
-	init_threads(&entries);
-
+	entries->num_philo = ft_atoi(argv[1]);
+	entries->num_to_eat = ft_atoi(argv[2]);
+	entries->time_to_die = ft_atoi(argv[3]);
+	entries->time_to_eat = ft_atoi(argv[4]);
+	if (argc == 6)
+		entries->time_to_sleep = ft_atoi(argv[5]);
+	else
+		entries->time_to_sleep = -1;
 	return (0);
-	if (argc || argv)
-		;
 }
-

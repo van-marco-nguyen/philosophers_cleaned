@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 19:29:59 by van               #+#    #+#             */
-/*   Updated: 2025/04/06 10:39:35 by van              ###   ########.fr       */
+/*   Updated: 2025/04/06 12:32:37 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int main() {
     pthread_mutex_init(&shared->mutex, NULL);
 
     // Exemple de tableau (modifiable)
-    int nombres[NUM_THREADS] = {3, 1, 2}; // Ordre d'exécution: 2, 1, 0
+    int nombres[] = {3, 1, 2}; // Ordre d'exécution: 2, 1, 0
     
     // Copier les valeurs et déterminer l'ordre d'exécution
     for(int i=0; i<NUM_THREADS; i++) {
