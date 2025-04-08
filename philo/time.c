@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 14:57:34 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/07 16:43:36 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:26:04 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,13 @@ long int	get_delay(t_timeval *tv)
 	}
 	ms += usec_diff / 1000;
 	return (ms);
+}
+
+long int	get_ms_timestamp(void)
+{
+	t_timeval	now;
+
+	if (gettimeofday(&now, NULL))
+		return (err_gettimeofday_call());
+	return (now.tv_usec / 1000);
 }

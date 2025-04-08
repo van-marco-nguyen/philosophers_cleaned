@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:20:53 by van               #+#    #+#             */
-/*   Updated: 2025/04/07 18:21:26 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:22:33 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PHILOSOPHERS_H
 
 # include <stdio.h>
-
 # include <pthread.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -29,7 +28,7 @@ typedef struct s_entries
 	int	num_to_eat;
 }				t_entries;
 
-typedef	struct timeval	t_timeval;
+typedef struct timeval	t_timeval;
 
 typedef struct s_philo
 {
@@ -39,7 +38,17 @@ typedef struct s_philo
 	int				*forks;
 	pthread_t		thread;
 	t_timeval		tv;
+	int				state;
+	t_entries		*entries;
 }				t_philo;
+
+enum	e_state
+{
+	EATING = 0,
+	SLEEPING = 1,
+	THINKING = 2,
+	DEAD = 3
+};
 
 // errors.c
 int			err_argc(int argc);
@@ -59,6 +68,16 @@ int			init_threads(t_entries *entries);
 // time.c
 long int	get_delay(t_timeval *tv);
 int			set_time(t_entries *entries, t_philo *philos);
+long int	get_ms_timestamp(void);
+
+// tasks.c
+void		*task(void *phil);
+
+// actions.c
+void		*do_die(t_philo *philo);
+void		*do_sleep(t_philo *philo);
+void		*do_eat(t_philo *philo);
+void		*do_think(t_philo *philo);
 
 // utils.c
 int			ft_atoi(char *s);
