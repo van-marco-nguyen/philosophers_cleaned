@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 12:41:53 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/06 16:03:23 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:05:07 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,11 @@ int	err_invalid_argv(int i)
 	write(2, "argv[", 6);
 	write(2, &i, 1);
 	write(2, "] is invalid\n", 14);
+	return (1);
+}
+
+int	err_gettimeofday_call(void)
+{
+	write (2, "Error appended while calling gettimeofday()\n", 45);
 	return (1);
 }

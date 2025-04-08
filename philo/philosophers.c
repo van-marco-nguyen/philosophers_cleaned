@@ -6,11 +6,14 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:20:12 by van               #+#    #+#             */
-/*   Updated: 2025/04/06 17:30:15 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/07 18:25:58 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+// valgrind --tool=helgrind		//err threads
+// pgrm principale bloauer mutex tant aue ts les threads ne sont pas initialisés
 
 int	main(int argc, char **argv)
 {
@@ -28,4 +31,3 @@ int	main(int argc, char **argv)
 	if (argc || argv)
 		;
 }
-
