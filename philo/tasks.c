@@ -6,7 +6,7 @@
 /*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:09:01 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/09 18:01:38 by van              ###   ########.fr       */
+/*   Updated: 2025/04/09 18:36:07 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void *task(void *phil) {
             break;
         }
         action(philo);
-        pthread_mutex_unlock(philo->mutex);
+        // pthread_mutex_unlock(philo->mutex);
     }
     return NULL;
 }
