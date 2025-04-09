@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 14:57:34 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/08 15:26:04 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/09 17:22:41 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	set_time(t_entries *entries, t_philo *philos)
+int	init_time(t_entries *entries, t_philo *philos)
 {
 	int			i;
 	t_timeval	now;
@@ -39,7 +39,6 @@ long int	get_delay(t_timeval *tv)
 		return (err_gettimeofday_call());
 	sec_diff = now.tv_sec - tv->tv_sec;
 	usec_diff = now.tv_usec - tv->tv_usec;
-
 	ms = sec_diff * 1000;
 	if (usec_diff < 0)
 	{
@@ -57,4 +56,11 @@ long int	get_ms_timestamp(void)
 	if (gettimeofday(&now, NULL))
 		return (err_gettimeofday_call());
 	return (now.tv_usec / 1000);
+}
+
+int	set_time(t_philo *philo)
+{
+	if (gettimeofday(&philo->tv, NULL) == -1)
+		return (err_gettimeofday_call());
+	return (0);
 }

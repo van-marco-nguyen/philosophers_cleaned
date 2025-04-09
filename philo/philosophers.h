@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:20:53 by van               #+#    #+#             */
-/*   Updated: 2025/04/08 17:22:33 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:31:30 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
+
+# define INACTIVE_TIME 2
 
 # include <stdio.h>
 # include <pthread.h>
@@ -44,10 +46,10 @@ typedef struct s_philo
 
 enum	e_state
 {
-	EATING = 0,
-	SLEEPING = 1,
-	THINKING = 2,
-	DEAD = 3
+	HUNGRY = 0,
+	EATING = 1,
+	SLEEPING = 2,
+	THINKING = 3
 };
 
 // errors.c
@@ -67,8 +69,9 @@ int			init_threads(t_entries *entries);
 
 // time.c
 long int	get_delay(t_timeval *tv);
-int			set_time(t_entries *entries, t_philo *philos);
+int			init_time(t_entries *entries, t_philo *philos);
 long int	get_ms_timestamp(void);
+int			set_time(t_philo *philo);
 
 // tasks.c
 void		*task(void *phil);
@@ -78,6 +81,10 @@ void		*do_die(t_philo *philo);
 void		*do_sleep(t_philo *philo);
 void		*do_eat(t_philo *philo);
 void		*do_think(t_philo *philo);
+
+// forks.c
+int			take_forks(t_philo *philo);
+void		put_forks(t_philo *philo);
 
 // utils.c
 int			ft_atoi(char *s);
