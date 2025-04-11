@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:20:53 by van               #+#    #+#             */
-/*   Updated: 2025/04/10 17:57:48 by van              ###   ########.fr       */
+/*   Updated: 2025/04/11 15:19:43 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# define INACTIVE_TIME 70
+# define INACTIVE_TIME 1
 
 # include <stdio.h>
 # include <pthread.h>
@@ -43,6 +43,7 @@ typedef struct s_philo
 	int				state;
 	t_entries		*entries;
 	int				*end;
+	int				*prior;
 }				t_philo;
 
 enum	e_state
@@ -86,6 +87,10 @@ void		*do_think(t_philo *philo);
 // forks.c
 int			take_forks(t_philo *philo);
 void		put_forks(t_philo *philo);
+
+// prior.c
+int			is_prior(t_philo *philo);
+void		act_prior(t_philo *philo);
 
 // utils.c
 int			ft_atoi(char *s);

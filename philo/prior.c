@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 14:10:15 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/11 14:58:38 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:08:41 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ void	act_prior_group(int *prior, int *num_odd, int *num_even, int *last)
 	}
 }
 
+void	act_prior_init(t_philo *philo, int *even, int *odd, int *last)
+{
+	*even = philo->entries->num_philo / 2;
+	*odd = philo->entries->num_philo / 2;
+	*last = 1;
+}
+
 void	act_prior(t_philo *philo)
 {
 	static int	num_odd = -1;
@@ -51,11 +58,7 @@ void	act_prior(t_philo *philo)
 	static int	last = -1;
 
 	if (num_odd == -1)
-	{
-		num_even = philo->entries->num_philo / 2;
-		num_odd = philo->entries->num_philo / 2;
-		last = 1;
-	}
+		act_prior_init(philo, &num_even, &num_odd, &last);
 	if (philo->eat_left == 0)
 	{
 		if (philo->id == philo->entries->num_philo)
@@ -64,11 +67,8 @@ void	act_prior(t_philo *philo)
 			num_even--;
 		else
 			num_odd--;
-		// printf("\t\t%d ends remain: %d %d %d\n", philo->id, num_odd, num_even, last);
-		act_prior_group(philo->prior, &num_even, &num_odd, &last);
-		return ;
 	}
-	if (philo->state == EATING)
+	else if (philo->state == EATING)
 	{
 		if (philo->id == philo->entries->num_philo)
 			philo->prior[3]++;
@@ -77,24 +77,5 @@ void	act_prior(t_philo *philo)
 		else
 			philo->prior[1]++;
 	}
-
 	act_prior_group(philo->prior, &num_even, &num_odd, &last);
-
-	// if (philo->state == EATING)
-	// 	(philo->prior[1])++;
-	// if (philo->prior[1] == philo->entries->num_philo / 2)
-	// {
-	// 	philo->prior[1] = 0;
-	// 	if (philo->prior[0] == 0)
-	// 		philo->prior[0] = 1;
-	// 	else if (philo->prior[0] == 1)
-	// 		philo->prior[0] = 2;
-	// 	else
-	// 		philo->prior[0] = 0;
-	// }
-	// else if (philo->prior[0] == 2 && philo->prior[1] == 1)
-	// {
-	// 	philo->prior[1] = 0;
-	// 	philo->prior[0] = 0;
-	// }
 }

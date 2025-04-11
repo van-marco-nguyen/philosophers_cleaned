@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tasks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:09:01 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/10 18:47:48 by van              ###   ########.fr       */
+/*   Updated: 2025/04/11 17:00:48 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,35 @@ int	action(t_philo *philo)
 
 void	*task(void *phil)
 {
-	int	delay;
-	t_philo *philo = (t_philo *)phil;
+	int		delay;
+	t_philo	*philo;
 
+	philo = (t_philo *)phil;
 	while (1)
 	{
 		pthread_mutex_lock(philo->mutex);
 		if (*philo->end || philo->eat_left == 0)
 		{
+			act_prior(philo);
 			pthread_mutex_unlock(philo->mutex);
 			return (NULL);
 		}
 		delay = get_delay(&philo->tv);
 		if (delay == -1)
 		{
-			printf("error occured\n");
 			pthread_mutex_unlock(philo->mutex);
 			return (NULL);
 		}
 		if (delay >= philo->entries->time_to_die)
 			return (do_die(philo));
+		if (philo->entries->num_philo % 2 && !is_prior(philo))
+		{
+			pthread_mutex_unlock(philo->mutex);
+			usleep(INACTIVE_TIME);
+			continue ;
+		}
+		if (philo->entries->num_philo % 2)
+			act_prior(philo);
 		action(philo);
 	}
 	return (NULL);

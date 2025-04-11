@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:42:55 by van               #+#    #+#             */
-/*   Updated: 2025/04/10 18:51:53 by van              ###   ########.fr       */
+/*   Updated: 2025/04/11 16:25:46 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,7 @@ int	take_forks(t_philo *philo)
 		usleep(time);
 	}
 	else
-	{
-		// printf("\t\t%d can't take his fork\n", philo->id);
 		pthread_mutex_unlock(philo->mutex);
-		// usleep(INACTIVE_TIME);
-		return (0);
-	}
 	return (0);
 }
 

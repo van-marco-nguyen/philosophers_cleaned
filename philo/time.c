@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 14:57:34 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/10 15:59:33 by van              ###   ########.fr       */
+/*   Updated: 2025/04/11 17:01:06 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,16 @@ long int	get_delay(t_timeval *tv)
 
 long int	get_ms_timestamp(void)
 {
-	t_timeval			now;
 	static t_timeval	start;
 	static int			initialized = 0;
 
-	if(!initialized)
+	if (!initialized)
 	{
 		if (gettimeofday(&start, NULL))
 			return (-1);
 		initialized = 1;
 	}
 	return (get_delay(&start));
-	if (gettimeofday(&now, NULL))
-		return (err_gettimeofday_call());
-	return (now.tv_usec / 1000);
 }
 
 int	set_time(t_philo *philo)

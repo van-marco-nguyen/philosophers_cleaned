@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:42:55 by van               #+#    #+#             */
-/*   Updated: 2025/04/11 16:19:13 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:51:53 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,4 @@ void	put_forks(t_philo *philo)
 	if (philo->eat_left > 0)
 		philo->eat_left--;
 	pthread_mutex_unlock(philo->mutex);
-	// act_prior(philo);
 }

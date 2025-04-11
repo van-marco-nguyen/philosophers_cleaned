@@ -2,9 +2,9 @@ NAME = philo
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=thread
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
 
-SRCS = actions.c check_argv.c errors.c forks.c init_threads.c philosophers.c s_entries.c tasks.c time.c utils.c
+SRCS = actions.c check_argv.c errors.c forks.c init_threads.c philosophers.c prior.c s_entries.c tasks.c time.c utils.c
 
 all: $(NAME)
 
