@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:23:27 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/11 17:56:29 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/11 18:21:04 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	init_abort(t_philo **philos)
 		return (1);
 	while (1)
 	{
-		if (philos[0]->end)
-			free(philos[0]->end);
-		else
-			break ;
 		if (philos[0]->forks)
 			free(philos[0]->forks);
+		else
+			break ;
+		if (philos[0]->end)
+			free(philos[0]->end);
 		else
 			break ;
 		if (philos[0]->prior)
@@ -45,12 +45,8 @@ int	init_alloc(t_entries *entries, t_philo **philos)
 		return (1);
 	(*philos)[0].forks = malloc (sizeof(int) * entries->num_philo);
 	if ((*philos)[0].forks == NULL)
-	{
-		free (philos);
-		return (1);
-	}
+		return (init_abort(philos));
 	(*philos)[0].end = malloc(sizeof(int));
-	// (*philos)[0].end = NULL;
 	if ((*philos)[0].end == NULL)
 		return (init_abort(philos));
 	(*philos)[0].prior = malloc(sizeof(int) * 4);
