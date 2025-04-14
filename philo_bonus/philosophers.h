@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:20:53 by van               #+#    #+#             */
-/*   Updated: 2025/04/14 17:46:29 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:21:09 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int			entries_init(t_entries *entries, int argc, char **argv);
 // check_argv.c
 int			check_argv(int argc, char **argv);
 
-// init_threads.c
-int			init_threads(t_entries *entries);
+// init_philos.c
+int			init_philos(t_entries *entries);
 
 // time.c
 long int	get_delay(t_timeval *tv);
