@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:20:53 by van               #+#    #+#             */
-/*   Updated: 2025/04/14 18:21:09 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:22:54 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,12 @@ typedef struct s_philo
 {
 	int				id;
 	int				eat_left;
-	pthread_mutex_t	*mutex;
-	int				*forks;
-	pthread_t		thread;
 	t_timeval		tv;
 	int				state;
 	t_entries		*entries;
-	int				*end;
-	int				*prior;
+	sem_t			*sem;
+	// int				*end;
+	// int				*prior;
 }				t_philo;
 
 enum	e_state
@@ -79,10 +77,10 @@ long int	get_ms_timestamp(void);
 int			set_time(t_philo *philo);
 
 // tasks.c
-void		*task(void *phil);
+int			task(t_philo *philo);
 
 // actions.c
-void		*do_die(t_philo *philo);
+int			do_die(t_philo *philo);
 void		*do_sleep(t_philo *philo);
 void		*do_eat(t_philo *philo);
 void		*do_think(t_philo *philo);
@@ -90,10 +88,6 @@ void		*do_think(t_philo *philo);
 // forks.c
 int			take_forks(t_philo *philo);
 void		put_forks(t_philo *philo);
-
-// prior.c
-int			is_prior(t_philo *philo);
-void		act_prior(t_philo *philo);
 
 // utils.c
 int			ft_atoi(char *s);

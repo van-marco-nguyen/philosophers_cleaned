@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:09:01 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/14 16:36:40 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:27:01 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,44 +25,19 @@ int	action(t_philo *philo)
 	return (0);
 }
 
-void	*task_cond_if_1(t_philo *philo)
+int	task(t_philo *philo)
 {
-	act_prior(philo);
-	pthread_mutex_unlock(philo->mutex);
-	return (NULL);
-}
-
-void	*task_cond_if_2(t_philo *philo)
-{
-	pthread_mutex_unlock(philo->mutex);
-	return (NULL);
-}
-
-void	*task(void *phil)
-{
-	int		delay;
-	t_philo	*philo;
-
-	philo = (t_philo *)phil;
 	while (1)
 	{
-		pthread_mutex_lock(philo->mutex);
-		if (*philo->end || philo->eat_left == 0)
-			return (task_cond_if_1(philo));
-		delay = get_delay(&philo->tv);
-		if (delay == -1)
-			task_cond_if_2(philo);
-		if (delay >= philo->entries->time_to_die)
-			return (do_die(philo));
-		if (philo->entries->num_philo % 2 && !is_prior(philo))
+		if (philo->eat_left == 0)
 		{
-			pthread_mutex_unlock(philo->mutex);
-			usleep(INACTIVE_TIME);
-			continue ;
+			break ;
 		}
-		if (philo->entries->num_philo % 2)
-			act_prior(philo);
+		if (get_delay(&philo->tv) >= philo->entries->time_to_die)
+			return (do_die(philo));
 		action(philo);
+		// usleep(100000);
 	}
-	return (NULL);
+	sem_close(philo->sem);
+	return (0);
 }
