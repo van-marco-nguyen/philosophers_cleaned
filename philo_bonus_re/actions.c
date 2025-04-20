@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:57:10 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/18 17:22:49 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/20 13:50:05 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	do_die(t_philo *philo)
 	printf("%ld %d died\n", get_ms_timestamp(), philo->id);
 	ret = philo->id;
 	philo->end = 1;
+	pthread_mutex_unlock(philo->mutex);
 	return (ret);
 	// if (philo->state == EATING)
 	// 	sem_post(philo->sem);

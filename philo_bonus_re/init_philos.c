@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:10:42 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/18 17:40:19 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/20 13:48:11 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	free_philo(t_philo *philo)
 	{
 		sem_close(philo->sem);
 		sem_unlink(philo->sem_name);
-		// free(philo->sem);
+		free(philo->sem);
 	}
 	if (philo->pids != NULL)
 		free(philo->pids);
@@ -101,10 +101,11 @@ void	init_philos(t_entries *entries)
 			if (pthread_create(philo.thread, NULL, check_death, &philo))
 			{
 				// pthread_mutex_unlock(philo.mutex);
-				pthread_mutex_destroy(philo.mutex);
+				// pthread_mutex_destroy(philo.mutex);
 				free_philo(&philo);
 			}
 			philo_routine(&philo);
+			printf("philo %d ends shouldn't have reach that line\n", philo.id);
 		}
 	}
 	// pthread_mutex_unlock(philo.mutex);

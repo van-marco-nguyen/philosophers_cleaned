@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:11:50 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/18 17:50:10 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/20 15:01:17 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	philo_routine(t_philo *philo)
 	ret = philo->id;
 	if (philo->eat_left == 0)
 		ret = 0;
-	pthread_mutex_destroy(philo->mutex);
+	// pthread_mutex_destroy(philo->mutex);
 	free_philo(philo);
 	exit (ret);
 }
