@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_threads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:23:27 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/11 18:21:04 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:12:24 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,53 +59,6 @@ int	init_alloc(t_entries *entries, t_philo **philos)
 		return (init_abort(philos));
 	return (0);
 }
-
-// int	init_alloc(t_entries *entries, t_philo **philos)
-// {
-// 	*philos = malloc (sizeof(t_philo) * entries->num_philo);
-// 	if (*philos == NULL)
-// 		return (1);
-// 	(*philos)[0].forks = malloc (sizeof(int) * entries->num_philo);
-// 	if ((*philos)[0].forks == NULL)
-// 	{
-// 		free (philos);
-// 		return (1);
-// 	}
-// 	(*philos)[0].end = malloc(sizeof(int));
-// 	if ((*philos)[0].end == NULL)
-// 	{
-// 		free((*philos)[0].forks);
-// 		free(philos);
-// 		return (1);
-// 	}
-// 	(*philos)[0].prior = malloc(sizeof(int) * 4);
-// 	if ((*philos[0]).prior == NULL)
-// 	{
-// 		free((*philos)[0].end);
-// 		free((*philos)[0].forks);
-// 		free(philos);
-// 		return (1);
-// 	}
-// 	(*philos)[0].mutex = malloc (sizeof(pthread_mutex_t));
-// 	if ((*philos)[0].mutex == NULL)
-// 	{
-// 		free((*philos)[0].end);
-// 		free((*philos)[0].forks);
-// 		free((*philos)[0].prior);
-// 		free(*philos);
-// 		return (1);
-// 	}
-// 	if (pthread_mutex_init((*philos)[0].mutex, NULL))
-// 	{
-// 		free((*philos)[0].end);
-// 		free((*philos)[0].prior);
-// 		free((*philos)[0].mutex);
-// 		free((*philos)[0].forks);
-// 		free(*philos);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 int	init_values(t_entries *entries, t_philo *philos)
 {

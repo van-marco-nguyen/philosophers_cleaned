@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:10:42 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/20 13:48:11 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:31:47 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ int	free_philo(t_philo *philo)
 		free(philo->thread);
 	if (philo->mutex != NULL)
 		free(philo->mutex);
-	if (philo->sem != NULL)
-	{
+	if (philo->sem != NULL && philo->sem != SEM_FAILED)
 		sem_close(philo->sem);
-		sem_unlink(philo->sem_name);
-		free(philo->sem);
-	}
 	if (philo->pids != NULL)
 		free(philo->pids);
 	if (philo->tv != NULL)
 		free(philo->tv);
+	// if (philo->prior != NULL)
+	// 	free(philo->prior);
 	return (1);
 }
 
@@ -38,6 +36,7 @@ int	init_allocs(t_philo *philo, t_entries *entries)
 	philo->sem = NULL;
 	philo->pids = NULL;
 	philo->tv = NULL;
+	// philo->prior = NULL;
 
 	philo->mutex = malloc(sizeof(pthread_mutex_t));
 	if (philo->mutex == NULL)
@@ -45,20 +44,25 @@ int	init_allocs(t_philo *philo, t_entries *entries)
 	philo->thread = malloc(sizeof(pthread_t));
 	if (philo->thread == NULL)
 		return (free_philo(philo));
-	// philo->sem = malloc(sizeof(sem_t));
-	// if (philo->sem == NULL)
-	// 	return (free_philo(philo));
 	philo->pids = malloc (sizeof(pid_t) * entries->num_philo);
 	if (philo->pids == NULL)
 		return (free_philo(philo));
 	philo->tv = malloc (sizeof(t_timeval));
 	if (philo->tv == NULL)
 		return (free_philo(philo));
+	// philo->prior = malloc (sizeof(int) * 4);
+	// if (philo->prior == NULL)
+	// 	return (free_philo(philo));
 	return (0);
 }
 
 int	init_values(t_entries *entries, t_philo *philo)
 {
+	// int	i;
+
+	// i = -1;
+	// while (++i > 4)
+	// 	philo->prior[i] = 0;
 	philo->entries = entries;
 	philo->eat_left = entries->num_to_eat;
 	philo->end = 0;
@@ -103,6 +107,7 @@ void	init_philos(t_entries *entries)
 				// pthread_mutex_unlock(philo.mutex);
 				// pthread_mutex_destroy(philo.mutex);
 				free_philo(&philo);
+				exit (0);
 			}
 			philo_routine(&philo);
 			printf("philo %d ends shouldn't have reach that line\n", philo.id);
@@ -127,5 +132,6 @@ void	init_philos(t_entries *entries)
 	}
 
 	pthread_mutex_destroy(philo.mutex);
+	sem_unlink(philo.sem_name);
 	free_philo(&philo);
 }

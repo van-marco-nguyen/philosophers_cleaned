@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   task.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:11:50 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/20 15:01:17 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:06:51 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,26 @@ void	philo_routine(t_philo *philo)
 	pthread_detach(*philo->thread);
 	while (1)
 	{
+		// printf("\t%d waits its mutex\n", philo->id);
+		pthread_mutex_lock(philo->mutex);
+		// printf("\t%d locked its mutex\n", philo->id);
 		if (philo->end)
 			break ;
-		pthread_mutex_lock(philo->mutex);
-		printf("philo %d waiting for his thread\n", philo->id);
-		// action(philo);
+		// printf("\t%d is going to do something\n", philo->id);
+		// printf("\t%d unlocked its mutex\n", philo->id);
 		pthread_mutex_unlock(philo->mutex);
-		usleep(500000);
+		action(philo);
+		// usleep(500000);
 	}
 
-	printf("philo %d thread ends\n", philo->id);
+	// printf("\t%d thread ends\n", philo->id);
 	ret = philo->id;
 	if (philo->eat_left == 0)
 		ret = 0;
-	// pthread_mutex_destroy(philo->mutex);
+	pthread_mutex_unlock(philo->mutex);
+	pthread_mutex_destroy(philo->mutex);
+	// free(philo->mutex);
+	// philo->mutex = NULL;
 	free_philo(philo);
 	exit (ret);
 }

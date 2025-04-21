@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:20:53 by van               #+#    #+#             */
-/*   Updated: 2025/04/18 17:23:23 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:31:37 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_philo
 	pthread_mutex_t	*mutex;
 	int				end;
 	pid_t			*pids;
-	// int				dead;
 	// int				*prior;
 }				t_philo;
 
@@ -97,6 +96,10 @@ void		*do_think(t_philo *philo);
 // forks.c
 int			take_forks(t_philo *philo);
 void		put_forks(t_philo *philo);
+
+// // prior.c
+// int			is_prior(t_philo *philo);
+// void		act_prior(t_philo *philo);
 
 // utils.c
 int			ft_atoi(char *s);
