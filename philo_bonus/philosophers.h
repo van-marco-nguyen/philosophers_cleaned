@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:20:53 by van               #+#    #+#             */
-/*   Updated: 2025/04/15 17:22:54 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:15:03 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <string.h>
 
 typedef struct s_entries
 {
@@ -39,11 +40,17 @@ typedef struct s_philo
 {
 	int				id;
 	int				eat_left;
-	t_timeval		tv;
+	t_timeval		*tv;
 	int				state;
 	t_entries		*entries;
 	sem_t			*sem;
-	// int				*end;
+	sem_t			*sem_2;
+	char			sem_name[16];
+	char			sem_name_2[16];
+	pthread_t		*thread;
+	pthread_mutex_t	*mutex;
+	int				end;
+	pid_t			*pids;
 	// int				*prior;
 }				t_philo;
 
@@ -60,6 +67,7 @@ int			err_argc(int argc);
 int			err_argc_value(int i, int value);
 int			err_invalid_argv(int i);
 int			err_gettimeofday_call(void);
+int			err_malloc(void);
 
 // s_entries.c
 int			entries_init(t_entries *entries, int argc, char **argv);
@@ -68,16 +76,19 @@ int			entries_init(t_entries *entries, int argc, char **argv);
 int			check_argv(int argc, char **argv);
 
 // init_philos.c
-int			init_philos(t_entries *entries);
+void		init_philos(t_entries *entries);
+int			free_philo(t_philo *philo);
 
 // time.c
 long int	get_delay(t_timeval *tv);
-int			init_time(t_entries *entries, t_philo *philos);
+int			init_time(t_philo *philo);
 long int	get_ms_timestamp(void);
 int			set_time(t_philo *philo);
 
-// tasks.c
-int			task(t_philo *philo);
+// task.c
+void		*task(void *arg);
+void		*check_death(void *arg);
+void		philo_routine(t_philo *philo);
 
 // actions.c
 int			do_die(t_philo *philo);
@@ -89,8 +100,13 @@ void		*do_think(t_philo *philo);
 int			take_forks(t_philo *philo);
 void		put_forks(t_philo *philo);
 
+// sem.c
+int			init_sem(t_philo *philo);
+void		 cat_id(int id, char *src);
+
 // utils.c
 int			ft_atoi(char *s);
 int			isnum(char *s);
+int			ft_strlcpy(char *dst, char *src, int size);
 
 #endif

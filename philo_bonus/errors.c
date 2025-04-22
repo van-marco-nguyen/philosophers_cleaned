@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 12:41:53 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/09 17:21:31 by van              ###   ########.fr       */
+/*   Updated: 2025/04/17 17:55:42 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,10 @@ int	err_gettimeofday_call(void)
 {
 	write (2, "Error appended while calling gettimeofday()\n", 45);
 	return (-1);
+}
+
+int	err_malloc(void)
+{
+	write(2, "Error: malloc failed\n", 21);
+	return (1);
 }

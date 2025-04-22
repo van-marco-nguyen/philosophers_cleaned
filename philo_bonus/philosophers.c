@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:20:12 by van               #+#    #+#             */
-/*   Updated: 2025/04/14 18:18:23 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/18 13:13:09 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ int	main(int argc, char **argv)
 		return (1);
 	if (entries.num_philo != 0)
 		init_philos(&entries);
-		// init_threads(&entries);
 	return (0);
 }

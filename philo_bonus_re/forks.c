@@ -6,7 +6,7 @@
 /*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:42:55 by van               #+#    #+#             */
-/*   Updated: 2025/04/21 19:32:21 by van              ###   ########.fr       */
+/*   Updated: 2025/04/22 16:37:50 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,16 @@ int	take_forks(t_philo *philo)
 {
 	int	time;
 
-	// while (!is_prior(philo))
-	// {
-	// 	usleep(INACTIVE_TIME);
-	// }
 	sem_wait(philo->sem);
-	// act_prior(philo);
 	pthread_mutex_lock(philo->mutex);
 	time = philo->entries->time_to_eat * 1000;
+	if (philo->entries->num_philo % 2 && philo->entries->num_philo < 4)
+		time += philo->id * 1000;
+	else if (philo->entries->num_philo % 2 && philo->entries->num_philo < 6)
+		time += philo->id * 500;
+	else if (philo->entries->num_philo % 2 && philo->entries->num_philo < 60)
+		time += philo->id * 100;
 	philo->state = HUNGRY;
-	// if (get_delay(philo->tv) >= philo->entries->time_to_die)
-	// 	return (do_die(philo));
 	if (philo->end == 1)
 	{
 		pthread_mutex_unlock(philo->mutex);

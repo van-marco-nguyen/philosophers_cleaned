@@ -3,28 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 14:57:34 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/11 17:01:06 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:01:05 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	init_time(t_entries *entries, t_philo *philos)
+int	init_time(t_philo *philo)
 {
-	int			i;
 	t_timeval	now;
 
 	if (gettimeofday(&now, NULL))
 		return (err_gettimeofday_call());
-	i = -1;
-	while (++i < entries->num_philo)
-	{
-		philos[i].tv.tv_sec = now.tv_sec;
-		philos[i].tv.tv_usec = now.tv_usec;
-	}
+	philo->tv->tv_sec = now.tv_sec;
+	philo->tv->tv_usec = now.tv_usec;
 	return (0);
 }
 
@@ -65,7 +60,7 @@ long int	get_ms_timestamp(void)
 
 int	set_time(t_philo *philo)
 {
-	if (gettimeofday(&philo->tv, NULL) == -1)
+	if (gettimeofday(philo->tv, NULL) == -1)
 		return (err_gettimeofday_call());
 	return (0);
 }

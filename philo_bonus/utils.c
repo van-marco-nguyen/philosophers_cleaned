@@ -6,7 +6,7 @@
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 13:09:02 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/06 15:48:10 by van-nguy         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:46:50 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,22 @@ int	ft_atoi(char *s)
 		s++;
 	}
 	return (sum * sign);
+}
+
+int	ft_strlcpy(char *dst, char *src, int size)
+{
+	int	i;
+
+	if (size == 0)
+		return (0);
+	i = 0;
+	while (--size)
+	{
+		*dst = *src;
+		src++;
+		dst++;
+		i++;
+	}
+	*dst = '\0';
+	return (i);
 }
