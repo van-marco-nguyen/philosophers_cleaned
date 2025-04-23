@@ -6,7 +6,7 @@
 /*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:20:53 by van               #+#    #+#             */
-/*   Updated: 2025/04/22 14:15:03 by van              ###   ########.fr       */
+/*   Updated: 2025/04/21 19:31:37 by van              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-# include <string.h>
 
 typedef struct s_entries
 {
@@ -44,9 +43,7 @@ typedef struct s_philo
 	int				state;
 	t_entries		*entries;
 	sem_t			*sem;
-	sem_t			*sem_2;
 	char			sem_name[16];
-	char			sem_name_2[16];
 	pthread_t		*thread;
 	pthread_mutex_t	*mutex;
 	int				end;
@@ -100,9 +97,9 @@ void		*do_think(t_philo *philo);
 int			take_forks(t_philo *philo);
 void		put_forks(t_philo *philo);
 
-// sem.c
-int			init_sem(t_philo *philo);
-void		 cat_id(int id, char *src);
+// // prior.c
+// int			is_prior(t_philo *philo);
+// void		act_prior(t_philo *philo);
 
 // utils.c
 int			ft_atoi(char *s);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: van <van@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:42:55 by van               #+#    #+#             */
-/*   Updated: 2025/04/22 15:53:31 by van              ###   ########.fr       */
+/*   Updated: 2025/04/23 16:57:53 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ int	take_forks(t_philo *philo)
 	int	time;
 
 	sem_wait(philo->sem);
-	sem_wait(philo->sem_2);
 	pthread_mutex_lock(philo->mutex);
 	time = philo->entries->time_to_eat * 1000;
-	if (philo->entries->num_philo % 2 && philo->entries->num_philo < 26)
-		time += philo->id * 10;
+	if (philo->entries->num_philo % 2 && philo->entries->num_philo < 4)
+		time += philo->id * 1000;
+	else if (philo->entries->num_philo % 2 && philo->entries->num_philo < 6)
+		time += philo->id * 500;
+	else if (philo->entries->num_philo % 2 && philo->entries->num_philo < 60)
+		time += philo->id * 100;
 	philo->state = HUNGRY;
 	if (philo->end == 1)
 	{
@@ -35,7 +38,6 @@ int	take_forks(t_philo *philo)
 	pthread_mutex_unlock(philo->mutex);
 	usleep(time);
 	sem_post(philo->sem);
-	sem_post(philo->sem_2);
 	return (0);
 }
 

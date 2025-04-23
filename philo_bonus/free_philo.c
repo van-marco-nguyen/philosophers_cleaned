@@ -1,48 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   free_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: van-nguy <van-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 13:09:02 by van-nguy          #+#    #+#             */
-/*   Updated: 2025/04/06 15:48:10 by van-nguy         ###   ########.fr       */
+/*   Created: 2025/04/23 19:42:11 by van-nguy          #+#    #+#             */
+/*   Updated: 2025/04/23 19:42:30 by van-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	isnum(char *s)
+int	free_philo(t_philo *philo)
 {
-	if (*s == '+' || *s == '-')
-		s++;
-	while (*s)
-	{
-		if (!('0' <= *s && *s <= '9'))
-			return (0);
-		s++;
-	}
+	if (philo->thread != NULL)
+		free(philo->thread);
+	if (philo->mutex != NULL)
+		free(philo->mutex);
+	if (philo->sem != NULL && philo->sem != SEM_FAILED)
+		sem_close(philo->sem);
+	if (philo->pids != NULL)
+		free(philo->pids);
+	if (philo->tv != NULL)
+		free(philo->tv);
 	return (1);
-}
-
-int	ft_atoi(char *s)
-{
-	int	sum;
-	int	sign;
-
-	sign = 1;
-	if (*s == '-' || *s == '+')
-	{
-		if (*s == '-')
-			sign = -1;
-		s++;
-	}
-	sum = 0;
-	while (*s)
-	{
-		sum *= 10;
-		sum += *s - '0';
-		s++;
-	}
-	return (sum * sign);
 }
